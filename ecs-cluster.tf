@@ -17,6 +17,7 @@ resource "aws_ecs_cluster" "default" {
   }
 }
 
+/*
 resource "aws_ecs_cluster" "blue-green-cluster" {
   name = aws_service_discovery_http_namespace.blue-green.name
 
@@ -35,3 +36,4 @@ resource "aws_ecs_cluster" "blue-green-cluster" {
     value = "disabled"
   }
 }
+*/
