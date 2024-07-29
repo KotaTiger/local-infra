@@ -126,3 +126,34 @@ resource "aws_security_group" "ecs-service" {
   name                   = "ecs-service" 
   vpc_id                 = aws_vpc.main.id
 }
+
+resource "aws_security_group" "aurora-postgres-sg" {
+  description = "aurora-postgres blue-green deploy security group"
+
+  egress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = "80"
+    protocol    = "tcp"
+    self        = "false"
+    to_port     = "80"
+  }
+
+  egress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = "443"
+    protocol    = "tcp"
+    self        = "false"
+    to_port     = "443"
+  }
+
+  ingress {
+    cidr_blocks = ["59.138.14.224/32"]
+    from_port   = "5432"
+    protocol    = "tcp"
+    self        = "false"
+    to_port     = "5432"
+  }
+
+  name   = "aurora-postgres-sg"
+  vpc_id = aws_vpc.main.id
+}
