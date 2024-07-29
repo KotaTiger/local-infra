@@ -3,7 +3,7 @@ resource "aws_ecs_task_definition" "default" {
   container_definitions = jsonencode([
     {
       "name" : "fagate-demo-container",
-      "image" : aws_ecr_repository.flask-demo-app.repository_url,
+      "image" : data.aws_ecr_repository.flask-demo-app.repository_url,
       "cpu" : 1024,
       "portMappings" : [
         {
