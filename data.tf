@@ -10,3 +10,11 @@ data "aws_eip" "by_tags" {
   }
   depends_on = [aws_eip.main]
 }
+
+#===================================
+#===================================
+#ecr
+
+data "aws_ecr_repository" "flask-demo-app" {
+  name = "flask-demo-app"
+}

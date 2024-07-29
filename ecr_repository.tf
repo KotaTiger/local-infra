@@ -1,3 +1,5 @@
+/*
+#imageがありdestroyできないため、dataで管理し削除するタイミングで書き換える。
 resource "aws_ecr_repository" "flask-demo-app" {
   encryption_configuration {
     encryption_type = "AES256"
@@ -10,3 +12,4 @@ resource "aws_ecr_repository" "flask-demo-app" {
   image_tag_mutability = "MUTABLE"
   name                 = "flask-demo-app"
 }
+*/
