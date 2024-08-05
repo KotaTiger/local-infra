@@ -49,12 +49,12 @@ locals {
 locals {
   natgateway_map_list = {
     ngw-1a = {
-      eip_name = "eip_01"
+      eip_name = aws_eip.main["eip_01"]
       subnet_id = aws_subnet.main["public-1a"].id
       Name = "ngw-1a"
     }
     ngw-1c = {
-      eip_name = "eip_02"
+      eip_name = aws_eip.main["eip_02"]
       subnet_id = aws_subnet.main["public-1c"].id
       Name = "ngw-1c"
     }
@@ -124,18 +124,13 @@ locals {
   }
 }
 
-#===================================
-#===================================
-#aws_ecs_service
 locals {
-  ecs_service_map_list = {
-    ecs_fargate_service01 = {
-      Name = "ecs-fargate-service01"
-      target_group_arn = aws_lb_target_group.default["ecs_tg_01"].arn
+  alb_map_blue_green_list = {
+    ecs_blue_green_alb01 = {
+      Name = "ecs-blue-green-alb01"
     }
-    ecs_fargate_service02 = {
-      Name = "ecs-fargate-service02"
-      target_group_arn = aws_lb_target_group.default["ecs_tg_02"].arn
+    ecs_blue_green_alb02 = {
+      Name = "ecs-blue-green-alb02"
     }
   }
 }
@@ -157,21 +152,11 @@ locals {
     ecs_tg_04 = {
       Name = "ecs-tg-4"
     }
-  }
-}
-
-#===================================
-#===================================
-#aws_lb_target_group_attachment
-locals {
-  aws_lb_target_group_attachment_map_list = {
-    aws_lb_target_group_attachment_1 = {
-      target_group_arn = aws_lb_target_group.default["ecs_tg_01"].arn
-      target_id = "10.0.17.23"
+    ecs_tg_05 = {
+      Name = "ecs-tg-5"
     }
-    aws_lb_target_group_attachment_2 = {
-      target_group_arn = aws_lb_target_group.default["ecs_tg_02"].arn
-      target_id = "10.0.0.23"
+    ecs_tg_06 = {
+      Name = "ecs-tg-6"
     }
   }
 }
@@ -188,6 +173,50 @@ locals {
     aws_lb_listner_2 = {
       target_group_arn = aws_lb_target_group.default["ecs_tg_02"].arn
       target_id = aws_lb.rolling-update["ecs_fargate_alb02"].arn
+    }
+  }
+}
+
+locals {
+  aws_lb_listner_blue_green_map_list = {
+    aws_lb_listner_1 = {
+      target_group_arn = aws_lb_target_group.default["ecs_tg_03"].arn
+      target_id = aws_lb.blue-green["ecs_blue_green_alb01"].arn
+    }
+    aws_lb_listner_2 = {
+      target_group_arn = aws_lb_target_group.default["ecs_tg_05"].arn
+      target_id = aws_lb.blue-green["ecs_blue_green_alb02"].arn
+    }
+  }
+}
+
+#===================================
+#===================================
+#aws_ecs_service
+locals {
+  ecs_service_map_list = {
+    ecs_fargate_service01 = {
+      Name = "ecs-fargate-service01"
+      target_group_arn = aws_lb_target_group.default["ecs_tg_01"].arn
+    }
+    ecs_fargate_service02 = {
+      Name = "ecs-fargate-service02"
+      target_group_arn = aws_lb_target_group.default["ecs_tg_02"].arn
+    }
+  }
+}
+
+locals {
+  ecs_service_blue_green_map_list = {
+    ecs_blue_green_service01 = {
+      Name = "esvc-blue-green-01"
+      first_target_group_arn = aws_lb_target_group.default["ecs_tg_03"].arn
+      second_target_group_arn = aws_lb_target_group.default["ecs_tg_04"].arn
+    }
+    ecs_blue_green_service02 = {
+      Name = "esvc-blue-green-02"
+      first_target_group_arn = aws_lb_target_group.default["ecs_tg_05"].arn
+      second_target_group_arn = aws_lb_target_group.default["ecs_tg_06"].arn
     }
   }
 }

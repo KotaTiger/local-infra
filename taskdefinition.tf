@@ -36,7 +36,7 @@ resource "aws_ecs_task_definition" "default" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = 1024
   memory                   = 3072
-  execution_role_arn       = aws_iam_role.ecs-task-execution-role.arn
+  execution_role_arn       = data.aws_iam_role.ecs-task-execution-role.arn
 
   network_mode             = "awsvpc"
 
@@ -45,4 +45,42 @@ resource "aws_ecs_task_definition" "default" {
     operating_system_family = "LINUX"
   }
 
+}
+
+resource "aws_ecs_task_definition" "blue-green" {
+  family = "blue-green-family"
+  container_definitions = jsonencode([
+    {
+      "name" : "blue-green-task",
+      "image" : "${data.aws_ecr_repository.blue-green-app.repository_url}:${data.aws_ecr_image.blue-green-app.image_tag}"
+      "cpu" : 1024,
+      
+      "portMappings" : [
+        {
+          "name" : "blue-green-port",
+          "containerPort" : 5000,
+          "hostPort" : 5000,
+          "protocol" : "tcp",
+          "appProtocol" : "http"
+        }
+      ],
+      "essential" : true,
+      "environment" : [],
+      "mountPoints" : [],
+      "volumesFrom" : [],
+      "systemControls" : []
+    }
+  ])
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = 1024
+  memory                   = 3072
+  execution_role_arn       = data.aws_iam_role.ecs-task-execution-role.arn
+  task_role_arn = data.aws_iam_role.ecs-task-execution-role.arn
+
+  network_mode             = "awsvpc"
+
+  runtime_platform {
+    cpu_architecture        = "X86_64"
+    operating_system_family = "LINUX"
+  }
 }

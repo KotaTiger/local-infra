@@ -6,7 +6,6 @@ resource "aws_service_discovery_http_namespace" "default" {
   }
 }
 
-/*
 resource "aws_service_discovery_http_namespace" "blue-green" {
   name = "blue-green-cluster"
 
@@ -14,4 +13,3 @@ resource "aws_service_discovery_http_namespace" "blue-green" {
     "AmazonECSManaged" = "true"
   }
 }
-*/

@@ -66,6 +66,14 @@ resource "aws_security_group" "ecs-blue-green" {
     to_port     = "80"
   }
 
+  ingress {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = "5000"
+    protocol    = "tcp"
+    self        = "false"
+    to_port     = "5000"
+  }
+
   name   = "blue-green-sg-for-alb"
   vpc_id = aws_vpc.main.id
 }
