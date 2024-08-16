@@ -9,3 +9,15 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "slack_channel_id" {
+  description = "Slack channel id"
+  type        = string
+  sensitive   = true
+}
+
+variable "slack_team_id" {
+  description = "Slack team id"
+  type        = string
+  sensitive   = true
+}

@@ -32,6 +32,10 @@ data "aws_iam_role" "ecs-access-policy" {
   name = "ECSAccessListPolicy"
 }
 
+data "aws_iam_role" "sns-slack-role" {
+  name = "sns-slack-role"
+}
+
 #===================================
 #===================================
 #step functions
