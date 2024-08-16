@@ -38,7 +38,7 @@ resource "aws_ecs_task_definition" "default" {
   memory                   = 3072
   execution_role_arn       = data.aws_iam_role.ecs-task-execution-role.arn
 
-  network_mode             = "awsvpc"
+  network_mode = "awsvpc"
 
   runtime_platform {
     cpu_architecture        = "X86_64"
@@ -54,7 +54,7 @@ resource "aws_ecs_task_definition" "blue-green" {
       "name" : "blue-green-task",
       "image" : "${data.aws_ecr_repository.blue-green-app.repository_url}:${data.aws_ecr_image.blue-green-app.image_tag}"
       "cpu" : 1024,
-      
+
       "portMappings" : [
         {
           "name" : "blue-green-port",
@@ -75,9 +75,9 @@ resource "aws_ecs_task_definition" "blue-green" {
   cpu                      = 1024
   memory                   = 3072
   execution_role_arn       = data.aws_iam_role.ecs-task-execution-role.arn
-  task_role_arn = data.aws_iam_role.ecs-task-execution-role.arn
+  task_role_arn            = data.aws_iam_role.ecs-task-execution-role.arn
 
-  network_mode             = "awsvpc"
+  network_mode = "awsvpc"
 
   runtime_platform {
     cpu_architecture        = "X86_64"

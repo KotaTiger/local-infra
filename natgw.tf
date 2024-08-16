@@ -1,6 +1,6 @@
 
 resource "aws_nat_gateway" "main" {
-  for_each = local.natgateway_map_list
+  for_each      = local.natgateway_map_list
   allocation_id = each.value.eip_name.id
   subnet_id     = each.value.subnet_id
 

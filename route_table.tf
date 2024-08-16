@@ -20,7 +20,7 @@ resource "aws_route_table" "private" {
   for_each = local.route_table_map_list
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = each.value.natgw_id
   }
 

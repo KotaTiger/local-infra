@@ -15,7 +15,7 @@ resource "aws_lb" "rolling-update" {
 }
 
 resource "aws_lb_listener" "rolling-update" {
-  for_each = local.aws_lb_listner_map_list
+  for_each          = local.aws_lb_listner_map_list
   load_balancer_arn = each.value.target_id
   port              = "80"
   protocol          = "HTTP"
@@ -43,7 +43,7 @@ resource "aws_lb" "blue-green" {
 }
 
 resource "aws_lb_listener" "blue-green" {
-  for_each = local.aws_lb_listner_blue_green_map_list
+  for_each          = local.aws_lb_listner_blue_green_map_list
   load_balancer_arn = each.value.target_id
   port              = "80"
   protocol          = "HTTP"

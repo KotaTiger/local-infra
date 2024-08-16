@@ -103,36 +103,36 @@ resource "aws_security_group" "rolling-update" {
 
 resource "aws_security_group" "ecs-service" {
   egress {
-    cidr_blocks      = [
+    cidr_blocks = [
       "0.0.0.0/0",
     ]
-    from_port        = 0
-    protocol         = "-1"
-    self             = false
-    to_port          = 0
+    from_port = 0
+    protocol  = "-1"
+    self      = false
+    to_port   = 0
   }
   ingress {
-    cidr_blocks      = []
-    from_port        = 5000
-    protocol         = "tcp"
-    security_groups  = [
+    cidr_blocks = []
+    from_port   = 5000
+    protocol    = "tcp"
+    security_groups = [
       aws_security_group.rolling-update.id
     ]
-    self             = false
-    to_port          = 5000
+    self    = false
+    to_port = 5000
   }
   ingress {
-    cidr_blocks      = []
-    from_port        = 80
-    protocol         = "tcp"
-    security_groups  = [
+    cidr_blocks = []
+    from_port   = 80
+    protocol    = "tcp"
+    security_groups = [
       aws_security_group.rolling-update.id
     ]
-    self             = false
-    to_port          = 80
+    self    = false
+    to_port = 80
   }
-  name                   = "ecs-service" 
-  vpc_id                 = aws_vpc.main.id
+  name   = "ecs-service"
+  vpc_id = aws_vpc.main.id
 }
 
 resource "aws_security_group" "aurora-postgres-sg" {

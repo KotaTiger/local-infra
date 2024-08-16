@@ -2,3 +2,6 @@
 *.tfstate
 *.tfstate.*
 *.tfstate.backup
+
+.DS_store
+*.zip

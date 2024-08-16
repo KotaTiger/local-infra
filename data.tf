@@ -12,7 +12,7 @@ data "aws_ecr_repository" "blue-green-app" {
 
 data "aws_ecr_image" "blue-green-app" {
   repository_name = "blue-green-deploy-app"
-  image_tag = "latest"
+  image_tag       = "latest"
 }
 
 
@@ -30,13 +30,13 @@ data "aws_iam_role" "fargate-event-bridge" {
 
 data "aws_iam_role" "ecs-access-policy" {
   name = "ECSAccessListPolicy"
-} 
+}
 
 #===================================
 #===================================
 #step functions
 
-data "aws_sfn_state_machine" "fargate"{
+data "aws_sfn_state_machine" "fargate" {
   name = "MyStateMachine-ns2k1lwx5"
 }
 
