@@ -4,5 +4,6 @@ resource "aws_lambda_function" "test_lambda" {
   filename      = data.archive_file.test_python.output_path
   handler       = "testFunction_python.lambda_handler"
 
+  timeout = 900
   runtime = "python3.10"
 }

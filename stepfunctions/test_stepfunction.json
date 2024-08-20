@@ -1,0 +1,27 @@
+{
+  "StartAt": "Hello",
+  "States": {
+    "Hello": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "OutputPath": "$.Payload",
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "${testFunction}"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "States.ALL"
+          ],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ],
+      "End": true,
+      "TimeoutSeconds": 900
+    }
+  },
+  "Comment": "test Terraform statemachine"
+}

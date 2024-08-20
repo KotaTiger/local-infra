@@ -36,6 +36,10 @@ data "aws_iam_role" "sns-slack-role" {
   name = "sns-slack-role"
 }
 
+data "aws_iam_role" "test-state-machine" {
+  name = "StepFunctions-MyStateMachine-019l9i03a-role-z6adgp9bq"
+}
+
 #===================================
 #===================================
 #step functions
