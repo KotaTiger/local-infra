@@ -23,8 +23,8 @@ resource "aws_ecs_service" "default" {
   tags = {
     "autoStopHour"      = "20"
     "desiredCount"      = "1"
-    "fargateUpdateHour" = "10"
-    "fargateUpdateDay"  = "Tuesday"
+    "fargateUpdateHour" = "12"
+    "fargateUpdateDay"  = "Wednesday"
   }
 
   load_balancer {
@@ -65,8 +65,8 @@ resource "aws_ecs_service" "blue-green" {
   tags = {
     "autoStopHour"      = "20"
     "desiredCount"      = "1"
-    "fargateUpdateHour" = "10"
-    "fargateUpdateDay"  = "Tuesday"
+    "fargateUpdateHour" = "12"
+    "fargateUpdateDay"  = "Wednesday"
   }
 
   load_balancer {

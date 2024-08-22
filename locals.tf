@@ -220,3 +220,41 @@ locals {
     }
   }
 }
+
+#===================================
+#===================================
+#aws_codedeploy_deployment_group
+locals {
+  aws_codedeploy_deployment_group_map_list = {
+    deployment_group_01 = {
+      Name = "blue-green-deploy01"
+      service_name = aws_ecs_service.blue-green["ecs_blue_green_service01"].name
+      listener_arns = aws_lb_listener.blue-green["aws_lb_listner_1"].arn
+      first_target_group_name  = aws_lb_target_group.default["ecs_tg_03"].name
+      second_target_group_name = aws_lb_target_group.default["ecs_tg_04"].name
+    }
+    deployment_group_02 = {
+      Name = "blue-green-deploy02"
+      service_name = aws_ecs_service.blue-green["ecs_blue_green_service02"].name
+      listener_arns = aws_lb_listener.blue-green["aws_lb_listner_2"].arn
+      first_target_group_name  = aws_lb_target_group.default["ecs_tg_05"].name
+      second_target_group_name = aws_lb_target_group.default["ecs_tg_06"].name
+    }
+  }
+}
+
+#===================================
+#===================================
+#aws_codepipeline
+locals {
+  aws_codepipeline_map_list = {
+    codepipeline_01 = {
+      Name = "cdpl-blue-green-01"
+      DeploymentGroupName = aws_codedeploy_deployment_group.blue-green["deployment_group_01"].deployment_group_name
+    }
+    codepipeline_02 = {
+      Name = "cdpl-blue-green-02"
+      DeploymentGroupName = aws_codedeploy_deployment_group.blue-green["deployment_group_02"].deployment_group_name
+    }
+  }
+}

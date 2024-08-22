@@ -40,6 +40,18 @@ data "aws_iam_role" "test-state-machine" {
   name = "StepFunctions-MyStateMachine-019l9i03a-role-z6adgp9bq"
 }
 
+data "aws_iam_role" "blue-green-build" {
+  name = "codebuild-blue-green-build-service-role"
+}
+
+data "aws_iam_role" "blue-green-deploy" {
+  name = "blue-green-deploy-role"
+}
+
+data "aws_iam_role" "blue-green-codepipeline" {
+  name = "AWSCodePipelineServiceRole-ap-northeast-1-blue-green-deploy-cod"
+}
+
 #===================================
 #===================================
 #step functions
