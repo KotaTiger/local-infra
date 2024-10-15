@@ -11,6 +11,10 @@ resource "aws_ecs_service" "default" {
 
   task_definition = aws_ecs_task_definition.default.arn
 
+  deployment_maximum_percent = 100
+
+  deployment_minimum_healthy_percent = 0
+
   deployment_circuit_breaker {
     enable   = true
     rollback = true
