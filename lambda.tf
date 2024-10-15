@@ -6,4 +6,16 @@ resource "aws_lambda_function" "test_lambda" {
 
   timeout = 900
   runtime = "python3.10"
+
+  /*
+  vpc_config {
+    subnet_ids = [
+      aws_subnet.main["public-1a"].id,
+      aws_subnet.main["public-1c"].id
+    ]
+    security_group_ids = [
+      aws_default_security_group.default.id
+    ]
+  }
+  */
 }
